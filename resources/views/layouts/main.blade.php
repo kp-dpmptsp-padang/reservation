@@ -9,6 +9,7 @@
     <link rel="icon" href="/images/Logo_Padang.svg">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     

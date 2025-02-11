@@ -23,7 +23,8 @@
                 <x-button href="{{ route('reservation') }}" variant="primary">
                     Reservasi
                 </x-button>
-                <x-button href="#" variant="secondary">
+                <x-button href="https://wa.me/6281374078088?text=Halo, saya ingin bertanya terkait tata cara reservasi kunjungan ke DPMPTSP Kota Padang" 
+                    target="_blank" variant="secondary">
                     Kontak
                 </x-button>
             </div>
@@ -65,32 +66,31 @@
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">Statistik Kunjungan</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="text-center">
-                    <div class="text-4xl font-bold text-[#00D5BE] mb-2">2,459</div>
+                    <div class="text-4xl font-bold text-[#00D5BE] mb-2">{{ number_format($totalVisits) }}</div>
                     <p class="text-gray-600">Total Kunjungan</p>
                 </div>
                 <div class="text-center">
-                    <div class="text-4xl font-bold text-[#00D5BE] mb-2">127</div>
+                    <div class="text-4xl font-bold text-[#00D5BE] mb-2">{{ number_format($visitsThisMonth) }}</div>
                     <p class="text-gray-600">Kunjungan Bulan Ini</p>
                 </div>
                 <div class="text-center">
-                    <div class="text-4xl font-bold text-[#00D5BE] mb-2">15</div>
+                    <div class="text-4xl font-bold text-[#00D5BE] mb-2">{{ number_format($visitsToday) }}</div>
                     <p class="text-gray-600">Kunjungan Hari Ini</p>
                 </div>
             </div>
         </div>
-        <div class="container mx-auto px-4 lg:px-24 pb-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Demografi Asal Kota</h3>
-                    <div class="w-full h-[300px]">
-                        <canvas id="kotaChart"></canvas>
-                    </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Demografi Asal Kota</h3>
+                <div class="w-full h-[300px]">
+                    <canvas id="kotaChart"></canvas>
                 </div>
-                <div class="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Demografi Asal Provinsi</h3>
-                    <div class="w-full h-[300px]">
-                        <canvas id="provinsiChart"></canvas>
-                    </div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-xl p-8 transform transition-all hover:shadow-2xl">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Demografi Asal Provinsi</h3>
+                <div class="w-full h-[300px]">
+                    <canvas id="provinsiChart"></canvas>
                 </div>
             </div>
         </div>
@@ -103,32 +103,58 @@
         const kotaChart = new Chart(document.getElementById('kotaChart'), {
             type: 'bar',
             data: {
-                labels: ['Padang', 'Pariaman', 'Bukittinggi', 'Payakumbuh', 'Padang Panjang'],
+                labels: {!! json_encode($topCities->pluck('city')) !!},
                 datasets: [{
                     label: 'Jumlah Kunjungan',
-                    data: [150, 90, 80, 70, 60],
+                    data: {!! json_encode($topCities->pluck('total')) !!},
                     backgroundColor: '#00D5BE',
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
             }
         });
 
         const provinsiChart = new Chart(document.getElementById('provinsiChart'), {
             type: 'bar',
             data: {
-                labels: ['Sumatera Barat', 'Riau', 'Jambi', 'Sumatera Utara', 'Jakarta'],
+                labels: {!! json_encode($topProvinces->pluck('province')) !!},
                 datasets: [{
                     label: 'Jumlah Kunjungan',
-                    data: [300, 150, 100, 80, 70],
+                    data: {!! json_encode($topProvinces->pluck('total')) !!},
                     backgroundColor: '#00D5BE',
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
             }
         });
     });
