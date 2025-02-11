@@ -13,7 +13,7 @@ use App\Http\Controllers\ReportController;
 Route::middleware('guest')->group(function () {
     Route::get('/', [GuestController::class, 'home'])->name('home');
     Route::get('/reservasi', [GuestController::class, 'reservation'])->name('reservation');
-    Route::post('/visits', [VisitController::class, 'store']);
+    Route::post(uri: '/visits', action: [VisitController::class, 'store']);
 
 });
 
@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Visit Management
-    Route::get('/visits', [VisitController::class, 'index']);
+    Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
     Route::get('/visits/{id}', [VisitController::class, 'show']);
     Route::put('/visits/{id}', [VisitController::class, 'update']);
     Route::delete('/visits/{id}', [VisitController::class, 'destroy']);
@@ -37,8 +37,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/visits/{id}/cancel', [VisitController::class, 'cancel']);
 
     // Reports
-    Route::get('/reports/visits', [ReportController::class, 'exportVisits']);
-    Route::get('/visits/{id}/export', [ReportController::class, 'exportVisit']);
+    // Recap of all visits
+    Route::get('/recap', [ReportController::class, 'visits'])->name('visits.recap');
+    // Export all visits
+    Route::get('/visits/export', [ReportController::class, 'exportVisits'])->name('visits.export');
+    // Export a specific visit
+    Route::get('/visits/{id}/export', [ReportController::class, 'exportVisit'])->name('visit.export');
 
 });
 
@@ -49,8 +53,5 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
-
-Route::get('/', [GuestController::class, 'home'])->name('home');
-Route::get('/reservasi', [GuestController::class, 'reservation'])->name('reservation');
 
 require __DIR__.'/auth.php';

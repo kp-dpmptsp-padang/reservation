@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function visits()
+    {
+        return view('admin.recap');
+    }
+
     public function exportVisits(Request $request)
     {
         // Implement export visits logic

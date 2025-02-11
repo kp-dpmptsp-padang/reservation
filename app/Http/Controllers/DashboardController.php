@@ -14,7 +14,7 @@ class DashboardController extends Controller
         // Pass the data to the view
         // return view('dashboard', compact('stats', 'visitsChart'));
 
-        return view('dashboard');
+        return view('admin.dashboard');
     }
     private function getStats()
     {
