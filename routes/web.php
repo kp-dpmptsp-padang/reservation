@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\DashboardController;
@@ -10,11 +11,10 @@ use App\Http\Controllers\ReportController;
 
 // Guest
 Route::middleware('guest')->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-
+    Route::get('/', [GuestController::class, 'home'])->name('home');
+    Route::get('/reservasi', [GuestController::class, 'reservation'])->name('reservation');
     Route::post('/visits', [VisitController::class, 'store']);
+
 });
 
 // Authenticated Routes
@@ -49,5 +49,8 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
+
+Route::get('/', [GuestController::class, 'home'])->name('home');
+Route::get('/reservasi', [GuestController::class, 'reservation'])->name('reservation');
 
 require __DIR__.'/auth.php';
