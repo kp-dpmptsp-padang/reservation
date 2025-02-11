@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('institution');
-            $table->string('phone_number')->nullable();
+            $table->string('phone_number');
             $table->string('whatsapp_number');
-            $table->string('email')->nullable();
+            $table->string('email');
             $table->string('province');
             $table->string('city');
-            $table->string('address')->nullable();
+            $table->string('address');
+            $table->string('homestay');
             $table->date('day');
             $table->time('clock');
             $table->string('topic');
@@ -32,6 +33,8 @@ return new class extends Migration
             $table->string('attachment_path')->nullable();
             $table->enum('attachment_type', ['image', 'document', 'other'])->nullable();
             $table->string('attachment_mime_type')->nullable();
+            $table->string('success_token', 64)->nullable();
+            $table->timestamp('token_expires_at')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->timestamp('cancelled_at')->nullable();
             $table->timestamps();

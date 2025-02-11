@@ -17,6 +17,7 @@ class Visit extends Model
         'province',
         'city',
         'address',
+        'homestay',
         'day',
         'clock',
         'topic',
@@ -27,7 +28,9 @@ class Visit extends Model
         'admin_id',
         'attachment_path',
         'attachment_type',
-        'attachment_mime_type'
+        'attachment_mime_type',
+        'success_token', 
+        'token_expires_at'
     ];
 
     protected $casts = [

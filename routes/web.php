@@ -7,14 +7,15 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RegionController;
 
 
 // Guest
 Route::middleware('guest')->group(function () {
     Route::get('/', [GuestController::class, 'home'])->name('home');
     Route::get('/reservasi', [GuestController::class, 'reservation'])->name('reservation');
-    Route::post(uri: '/visits', action: [VisitController::class, 'store']);
-
+    Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
+    Route::get('/reservasi/sukses/{token}', [VisitController::class, 'showSuccess'])->name('reservation.success');
 });
 
 // Authenticated Routes
@@ -52,6 +53,11 @@ Route::middleware(['auth', 'role:super-admin'])->group(function () {
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+});
+
+Route::prefix('regions')->group(function () {
+    Route::get('provinces', [RegionController::class, 'provinces']);
+    Route::get('provinces/{province}/cities', [RegionController::class, 'cities']);
 });
 
 require __DIR__.'/auth.php';
