@@ -8,12 +8,12 @@ class VisitController extends Controller
 {
     public function store(Request $request)
     {
-        // Implement submit visit logic
+        // Implement store visit logic
     }
 
     public function index(Request $request)
     {
-        // Implement list visits logic
+        return view('admin.visit');
     }
 
     public function show($id)
