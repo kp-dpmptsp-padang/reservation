@@ -16,6 +16,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/reservasi', [GuestController::class, 'reservation'])->name('reservation');
     Route::post('/visits', [VisitController::class, 'store'])->name('visits.store');
     Route::get('/reservasi/sukses/{token}', [VisitController::class, 'showSuccess'])->name('reservation.success');
+
+    Route::get('/referensi-penginapan', [GuestController::class, 'hotelReference'])->name('hotel');
+    Route::get('/referensi-oleh-oleh', [GuestController::class, 'souvenirReference'])->name('souvenir');
 });
 
 // Authenticated Routes

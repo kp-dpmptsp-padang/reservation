@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Visit;
 use App\Models\Province;
 use Carbon\Carbon;
+
 
 class GuestController extends Controller
 {
@@ -51,4 +51,28 @@ class GuestController extends Controller
     {
         return view('reservation');
     }
+
+    public function hotelReference()
+    {
+        return view('hotel');
+    }
+
+    public function souvenirReference()
+    {
+        try {
+            $filePath = public_path('storage/data/oleh-oleh.json');
+            
+            if (!file_exists($filePath)) {
+                throw new \Exception("File JSON tidak ditemukan");
+            }
+            
+            $jsonContent = file_get_contents($filePath);
+            $souvenirs = json_decode($jsonContent, true);
+  
+            return view('souvenir', compact('souvenirs'));
+            
+        } catch (\Exception $e) {
+            return view('souvenir', ['souvenirs' => ['oleh-oleh' => []]]);
+        }
+}
 }

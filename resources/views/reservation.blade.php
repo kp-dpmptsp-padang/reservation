@@ -202,17 +202,39 @@
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">Data Tempat Penginapan</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="homestay" class="block text-sm font-medium text-gray-700">
+                                    <label for="homestay_select" class="block text-sm font-medium text-gray-700">
                                         Tempat Menginap selama di Padang <span class="text-red-500">*</span>
                                     </label>
                                     <div class="relative mt-1">
                                         <div class="absolute top-3 left-3 flex items-start pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                             </svg>
                                         </div>
-                                        <input type="text" name="homestay" id="homestay" 
-                                            class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
+                                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <select name="homestay" id="homestay_select"
+                                            class="block w-full pl-10 pr-10 py-2.5 rounded-lg border border-gray-300 bg-white shadow-sm focus:ring-2 focus:ring-[#00D5BE] focus:border-[#00D5BE] transition-colors duration-200 appearance-none cursor-pointer hover:border-gray-400">
+                                            <option value="">Pilih tempat menginap...</option>
+                                            <option value="other">Lainnya</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="manual_input_container" class="hidden">
+                                    <label for="homestay" class="block text-sm font-medium text-gray-700">
+                                        Masukkan Nama Penginapan <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative mt-1">
+                                        <div class="absolute top-3 left-3 flex items-start pointer-events-none">
+                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                            </svg>
+                                        </div>
+                                        <input type="text" name="homestay" id="homestay"
+                                            class="block w-full pl-10 py-2.5 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#00D5BE] focus:border-[#00D5BE] transition-colors duration-200">
                                     </div>
                                 </div>
                             </div>
@@ -300,7 +322,7 @@
                         
                                 <div class="md:col-span-2">
                                     <label for="description" class="block text-sm font-medium text-gray-700">
-                                        Keterangan (Opsional)
+                                        Keterangan
                                     </label>
                                     <div class="relative mt-1">
                                         <div class="absolute top-3 left-3 flex items-start pointer-events-none">
@@ -316,7 +338,7 @@
                         </div>
 
                         <div class="bg-yellow-50 p-6 rounded-xl border border-yellow-200 shadow-sm">
-                            <h3 class="text-xl font-semibold text-yellow-800 mb-4">Data Surat Permohonan Kunjungan (Opsional)</h3>
+                            <h3 class="text-xl font-semibold text-yellow-800 mb-4">Data Surat Permohonan Kunjungan</h3>
                         
                             <div>
                                 <label for="letter_file" class="block text-sm font-medium text-gray-700">Upload Surat (JPG/JPEG/PNG/PDF, max 3MB)</label>
@@ -546,5 +568,62 @@
                 });
             }
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const API_URL = 'https://padang-hotel-api.vercel.app';
+        const select = document.getElementById('homestay_select');
+        const manualInput = document.getElementById('manual_input_container');
+        const homestayInput = document.getElementById('homestay');
+
+        async function fetchHotels() {
+            try {
+                const response = await fetch(`${API_URL}/hotels`);
+                const result = await response.json();
+                
+                const hotels = result.hotels || result.data || result;
+                
+                if (Array.isArray(hotels)) {
+                    hotels.forEach(hotel => {
+                        const option = document.createElement('option');
+                        const hotelName = hotel.name || hotel.nama || hotel;
+                        option.value = hotelName;
+                        option.textContent = hotelName;
+                        select.insertBefore(option, select.lastElementChild);
+                    });
+                } else {
+                    throw new Error('Data hotel tidak valid');
+                }
+            } catch (error) {
+                const defaultHotels = [
+                    'Hotel Mercure Padang',
+                    'Hotel Grand Inna Padang',
+                    'Hotel The Axana Padang',
+                    'Hotel HW Padang',
+                    'Hotel Pangeran Beach'
+                ];
+                
+                defaultHotels.forEach(hotelName => {
+                    const option = document.createElement('option');
+                    option.value = hotelName;
+                    option.textContent = hotelName;
+                    select.insertBefore(option, select.lastElementChild);
+                });
+            }
+        }
+
+        select.addEventListener('change', function() {
+            const selectedValue = this.value;
+            if (selectedValue === 'other') {
+                manualInput.classList.remove('hidden');
+                homestayInput.value = ''; 
+            } else {
+                manualInput.classList.add('hidden');
+                homestayInput.required = false;
+                homestayInput.value = selectedValue; 
+            }
+        });
+
+        fetchHotels();
     });
 </script>
