@@ -24,10 +24,22 @@
             <!-- Delete Account -->
             <!-- <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+                    <x-modal id="delete-account-modal" title="Hapus Akun">
+                        @include('profile.partials.delete-user-form')
+                    </x-modal>
                 </div>
             </div> -->
         </div>
     </div>
 </section>
+
+<script>
+  function openModal(modalId) {
+    document.getElementById(modalId).classList.add('show');
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('show');
+  }
+</script>
 @endsection

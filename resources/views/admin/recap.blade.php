@@ -1,4 +1,5 @@
-@extends('layouts.admin')
+<!-- @extends('layouts.admin')
+@section('title', content: 'Rekap Kunjungan | DPMPTSP Kota Padang')
 @section('content')
-<h1>Halo ini rekap woi</h1>
-@endsection
+<x-table></x-table>
+@endsection -->
