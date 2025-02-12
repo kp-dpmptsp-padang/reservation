@@ -21,12 +21,14 @@ class SuperAdminSeeder extends Seeder
             'role' => 'super-admin'
         ]);
  
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@dpmptsp.padang.go.id', 
-            'password' => Hash::make('password123'),
-            'phone_number' => '081234567891',
-            'role' => 'admin'
-        ]);
+        for ($i = 1; $i <= 20; $i++) {
+            User::create([
+                'name' => 'Admin ' . $i,
+                'email' => 'admin' . $i . '@dpmptsp.padang.go.id',
+                'password' => Hash::make('password123'),
+                'phone_number' => '08123456789' . $i,
+                'role' => 'admin'
+            ]);
+        }
     }
 }
