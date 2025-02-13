@@ -171,7 +171,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold text-white">Lokasi MPP Kota Padang</h3>
+                            <h3 class="text-xl font-bold text-white">Lokasi Mal Pelayanan Publik Kota Padang</h3>
                             <p class="text-teal-100 mt-1">Plaza Andalas Lantai 4, Kota Padang</p>
                         </div>
                     </div>
