@@ -12,15 +12,11 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    // Route::get('register', [RegisteredUserController::class, 'create'])
-    //     ->name('register');
 
-    // Route::post('register', [RegisteredUserController::class, 'store']);
-
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    Route::get('login/f4893768330c1de9beebc9a9d5c2d72f3924ad485b3808d967c26da48851b494d4321e03a0e78da8d89dd9b684017074f29586d6271651111651f71cc8ad204e', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login/f4893768330c1de9beebc9a9d5c2d72f3924ad485b3808d967c26da48851b494d4321e03a0e78da8d89dd9b684017074f29586d6271651111651f71cc8ad204e', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -54,6 +50,6 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    Route::post('logout/f4893768330c1de9beebc9a9d5c2d72f3924ad485b3808d967c26da48851b494d4321e03a0e78da8d89dd9b684017074f29586d6271651111651f71cc8ad204e', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
