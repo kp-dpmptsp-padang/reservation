@@ -94,10 +94,6 @@
       <h4 class="text-sm font-medium text-gray-500 mb-3">Informasi Kontak</h4>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
-          <span class="text-sm text-gray-500">Alamat</span>
-          <span class="font-medium text-gray-900">{{ $visit->address }}</span>
-        </div>
-        <div class="flex flex-col">
           <span class="text-sm text-gray-500">Homestay</span>
           <span class="font-medium text-gray-900">{{ $visit->homestay }}</span>
         </div>
@@ -112,10 +108,6 @@
         <div class="flex flex-col">
           <span class="text-sm text-gray-500">Email</span>
           <span class="font-medium text-gray-900">{{ $visit->email }}</span>
-        </div>
-        <div class="flex flex-col">
-          <span class="text-sm text-gray-500">Nomor Telepon</span>
-          <span class="font-medium text-gray-900">{{ $visit->phone_number }}</span>
         </div>
         <div class="flex flex-col">
           <span class="text-sm text-gray-500">WhatsApp</span>

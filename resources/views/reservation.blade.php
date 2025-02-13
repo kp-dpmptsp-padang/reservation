@@ -71,20 +71,7 @@
                                 </div>
                                 
                                 <div>
-                                    <x-input-label value="Nomor HP (dapat menerima panggilan)" required />
-                                    <div class="relative mt-1">
-                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                            </svg>
-                                        </div>
-                                        <input type="tel" name="phone_number" id="phone_number" 
-                                            class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <x-input-label value="Nomor WhatsApp (boleh sama dengan nomor HP)" required />
+                                    <x-input-label value="Nomor WhatsApp (yang bisa dihubungi)" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,6 +79,19 @@
                                             </svg>
                                         </div>
                                         <input type="tel" name="whatsapp_number" id="whatsapp_number" 
+                                            class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <x-input-label value="Email Instansi/Lembaga/Pemohon" required />
+                                    <div class="relative mt-1">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                        <input type="email" name="email" id="email" 
                                             class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
                                     </div>
                                 </div>
@@ -152,33 +152,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div>
-                                    <x-input-label value="Email Instansi/Lembaga/Pemohon" required />
-                                    <div class="relative mt-1">
-                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                            </svg>
-                                        </div>
-                                        <input type="email" name="email" id="email" 
-                                            class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <x-input-label value="Alamat Instansi" required />
-                                    <div class="relative mt-1">
-                                        <div class="absolute top-3 left-3 flex items-start pointer-events-none">
-                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                        </div>
-                                        <textarea name="address" id="address" rows="3" 
-                                            class="block w-full pl-10 p-2 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]"></textarea>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -186,35 +159,15 @@
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">Data Tempat Penginapan</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <x-input-label value="Tempat Menginap selama di Padang" required />
+                                    <x-input-label value="Tempat menginap selama di Padang" required />
                                     <div class="relative mt-1">
-                                        <div class="absolute top-3 left-3 flex items-start pointer-events-none">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                             </svg>
                                         </div>
-                                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <select name="homestay" id="homestay_select"
-                                            class="mt-1 block w-full pl-10 pr-10 py-2 text-base rounded-lg border-gray-300 focus:outline-none focus:ring-[#00D5BE] focus:border-[#00D5BE] sm:text-sm transition-all duration-200 appearance-none bg-white">
-                                            <option value="">Pilih tempat menginap</option>
-                                            <option value="other">Lainnya</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div id="manual_input_container" class="hidden">
-                                    <x-input-label value="Masukkan Nama Penginapan" required />
-                                    <div class="relative mt-1">
-                                        <div class="absolute top-3 left-3 flex items-start pointer-events-none">
-                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                            </svg>
-                                        </div>
-                                        <input type="text" name="homestay" id="homestay"
-                                            class="block w-full pl-10 py-2.5 rounded-lg border border-gray-300 shadow-sm focus:ring-2 focus:ring-[#00D5BE] focus:border-[#00D5BE] transition-colors duration-200">
+                                        <input type="text" name="homestay" id="homestay" placeholder="Contoh: Hotel XYZ"
+                                            class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
                                     </div>
                                 </div>
                             </div>
@@ -238,7 +191,7 @@
                                     </div>
                                 
                                     <div>
-                                        <x-input-label value="Jam Kunjungan" required />
+                                        <x-input-label value="Jam Kunjungan (WIB)" required />
                                         <div class="relative mt-1">
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -278,7 +231,7 @@
                                 </div>
                                 
                                 <div>
-                                    <x-input-label value="Pimpinan Rombongan" required />
+                                    <x-input-label value="Jabatan Pimpinan Rombongan" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -480,62 +433,5 @@
                 });
             }
         });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const API_URL = 'https://padang-hotel-api.vercel.app';
-        const select = document.getElementById('homestay_select');
-        const manualInput = document.getElementById('manual_input_container');
-        const homestayInput = document.getElementById('homestay');
-
-        async function fetchHotels() {
-            try {
-                const response = await fetch(`${API_URL}/hotels`);
-                const result = await response.json();
-                
-                const hotels = result.hotels || result.data || result;
-                
-                if (Array.isArray(hotels)) {
-                    hotels.forEach(hotel => {
-                        const option = document.createElement('option');
-                        const hotelName = hotel.name || hotel.nama || hotel;
-                        option.value = hotelName;
-                        option.textContent = hotelName;
-                        select.insertBefore(option, select.lastElementChild);
-                    });
-                } else {
-                    throw new Error('Data hotel tidak valid');
-                }
-            } catch (error) {
-                const defaultHotels = [
-                    'Hotel Mercure Padang',
-                    'Hotel Grand Inna Padang',
-                    'Hotel The Axana Padang',
-                    'Hotel HW Padang',
-                    'Hotel Pangeran Beach'
-                ];
-                
-                defaultHotels.forEach(hotelName => {
-                    const option = document.createElement('option');
-                    option.value = hotelName;
-                    option.textContent = hotelName;
-                    select.insertBefore(option, select.lastElementChild);
-                });
-            }
-        }
-
-        select.addEventListener('change', function() {
-            const selectedValue = this.value;
-            if (selectedValue === 'other') {
-                manualInput.classList.remove('hidden');
-                homestayInput.value = ''; 
-            } else {
-                manualInput.classList.add('hidden');
-                homestayInput.required = false;
-                homestayInput.value = selectedValue; 
-            }
-        });
-
-        fetchHotels();
     });
 </script>

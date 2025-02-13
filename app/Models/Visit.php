@@ -11,12 +11,10 @@ class Visit extends Model
     protected $fillable = [
         'name',
         'institution',
-        'phone_number',
         'whatsapp_number',
         'email',
         'province_id',
         'city_id',
-        'address',
         'homestay',
         'day',
         'clock',

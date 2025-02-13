@@ -15,12 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('institution');
-            $table->string('phone_number');
             $table->string('whatsapp_number');
             $table->string('email');
             $table->foreignId('province_id')->constrained('provinces');
             $table->foreignId('city_id')->constrained('cities');
-            $table->string('address');
             $table->string('homestay');
             $table->date('day');
             $table->time('clock');

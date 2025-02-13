@@ -15,10 +15,6 @@
           <input type="text" name="institution" id="institution" class="form-input focus:ring-[#00D5BE]" value="{{ $visit->institution }}" required>
         </div>
         <div class="flex flex-col">
-          <label for="phone_number" class="text-sm text-gray-500">Nomor Telepon</label>
-          <input type="text" name="phone_number" id="phone_number" class="form-input focus:ring-[#00D5BE]" value="{{ $visit->phone_number }}" required>
-        </div>
-        <div class="flex flex-col">
           <label for="whatsapp_number" class="text-sm text-gray-500">Nomor WhatsApp</label>
           <input type="text" name="whatsapp_number" id="whatsapp_number" class="form-input focus:ring-[#00D5BE]" value="{{ $visit->whatsapp_number }}" required>
         </div>
@@ -33,10 +29,6 @@
         <div class="flex flex-col">
           <label for="city" class="text-sm text-gray-500">Kota</label>
           <input type="text" name="city" id="city" class="form-input focus:ring-[#00D5BE]" value="{{ $visit->city->name }}" required>
-        </div>
-        <div class="flex flex-col">
-          <label for="address" class="text-sm text-gray-500">Alamat</label>
-          <input type="text" name="address" id="address" class="form-input focus:ring-[#00D5BE]" value="{{ $visit->address }}" required>
         </div>
         <div class="flex flex-col">
           <label for="homestay" class="text-sm text-gray-500">Homestay</label>
