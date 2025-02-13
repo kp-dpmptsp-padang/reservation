@@ -71,11 +71,11 @@
 </x-table>
 
 <!-- Modals -->
-@include('admin.user.create')
+@include('admin.users.create')
 @foreach ($users as $user)
-  @include('admin.user.view', ['user' => $user])
-  @include('admin.user.edit', ['user' => $user])
-  @include('admin.user.delete', ['user' => $user])
+  @include('admin.users.view', ['user' => $user])
+  @include('admin.users.edit', ['user' => $user])
+  @include('admin.users.delete', ['user' => $user])
 @endforeach
 
 <script>

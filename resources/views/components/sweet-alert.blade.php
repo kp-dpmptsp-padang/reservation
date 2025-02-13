@@ -15,6 +15,16 @@
                     icon: 'error',
                     title: 'Gagal',
                     text: '{{ session('error') }}',
+                    confirmButtonColor: '#FF0000',
+                });
+            @endif
+
+            @if ($errors->any())
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
+                    confirmButtonColor: '#FF0000',
                 });
             @endif
         });

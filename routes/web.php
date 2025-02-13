@@ -33,29 +33,35 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Visit Management
-    Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
-    Route::get('/visits/{id}', [VisitController::class, 'show']);
-    Route::put('/visits/{id}', [VisitController::class, 'update']);
-    Route::delete('/visits/{id}', [VisitController::class, 'destroy']);
-    Route::put('/visits/{id}/verify', [VisitController::class, 'verify']);
-    Route::put('/visits/{id}/cancel', [VisitController::class, 'cancel']);
+    Route::get('/kunjungan', [VisitController::class, 'index'])->name('visits.index');
+    Route::get('/kunjungan/all', [VisitController::class, 'all'])->name('visits.all');
+    Route::get('/kunjungan/filter', [VisitController::class, 'filter'])->name('visits.filter');
+    Route::put('/kunjungan/{id}', [VisitController::class, 'update'])->name('visits.update');
+    Route::delete('/kunjungan/{id}', [VisitController::class, 'deny'])->name('visits.deny');
+    Route::put('/kunjungan/{id}/verify', [VisitController::class, 'verify'])->name('visits.verify');
+    Route::put('/kunjungan/{id}/cancel', [VisitController::class, 'cancel'])->name('visits.cancel');
+    
 
-    // Reports
-    // Recap of all visits
-    Route::get('/recap', [ReportController::class, 'visits'])->name('visits.recap');
-    // Export all visits
-    Route::get('/visits/export', [ReportController::class, 'exportVisits'])->name('visits.export');
+    // Recap
+    Route::get('/rekap', [ReportController::class, 'recap'])->name('visits.recap');
+    Route::get('/rekap/all', [ReportController::class, 'all'])->name('recap.all');
+    Route::get('/rekap/filter', [ReportController::class, 'filter'])->name('recap.filter');
+    
+    // Export
+    Route::post('/kunjungan/export', [ReportController::class, 'exportVisits'])->name('visits.export'); // New route for exporting visit data
+    Route::post('/rekap/export', [ReportController::class, 'exportRecap'])->name('recap.export');
+    
     // Export a specific visit
-    Route::get('/visits/{id}/export', [ReportController::class, 'exportVisit'])->name('visit.export');
+    Route::post('/kunjungan/{id}/export', [ReportController::class, 'exportVisit'])->name('visit.export');
 
 });
 
 // User Management (Super Admin Only)
 Route::middleware(['auth', 'role:super-admin'])->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('/admin', [UserController::class, 'index'])->name('users.index');
+    Route::post('/admin', [UserController::class, 'store'])->name('users.store');
+    Route::put('/admin/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/admin/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 Route::prefix('regions')->group(function () {

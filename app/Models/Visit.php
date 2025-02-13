@@ -30,7 +30,9 @@ class Visit extends Model
         'attachment_type',
         'attachment_mime_type',
         'success_token', 
-        'token_expires_at'
+        'token_expires_at',
+        'verified_at',
+        'cancelled_at'
     ];
 
     protected $casts = [
@@ -39,11 +41,23 @@ class Visit extends Model
         'group_size' => 'integer',
         'status' => VisitStatusEnum::class,
         'attachment_type' => AttachmentTypeEnum::class,
+        'verified_at' => 'datetime',
+        'cancelled_at' => 'datetime',
     ];
 
     public function admin()
     {
         return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function canBeVerified(): bool
@@ -54,16 +68,28 @@ class Visit extends Model
     public function shouldStart(): bool
     {
         return $this->status === VisitStatusEnum::VERIFIED &&
-               $this->day->isToday() &&
-               now()->gte($this->clock);
+               $this->day->isToday();
+    }
+
+    public function start(): void
+    {
+        $this->update([
+            'status' => VisitStatusEnum::ONGOING,
+        ]);
     }
     
     public function shouldComplete(): bool
     {
-        // Asumsikan kunjungan selesai setelah 3 jam
         return $this->status === VisitStatusEnum::ONGOING &&
-               now()->gte($this->clock->addHours(3));
+               $this->day->isPast();
     }
+
+    public function complete(): void
+    {
+        $this->update([
+            'status' => VisitStatusEnum::COMPLETED,
+        ]);
+    }   
     
     public function verify(?User $admin = null): void
     {
