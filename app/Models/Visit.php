@@ -50,16 +50,6 @@ class Visit extends Model
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    public function province()
-    {
-        return $this->belongsTo(Province::class);
-    }
-
-    public function city()
-    {
-        return $this->belongsTo(City::class);
-    }
-
     public function canBeVerified(): bool
     {
         return $this->status === VisitStatusEnum::PENDING;

@@ -5,11 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Visit;
+use App\VisitStatusEnum;
 
 class UserController extends Controller
 {
+
+    private function updatePastVisitsStatus()
+    {
+        Visit::where('day', '<', now()->startOfDay())
+            ->whereNotIn('status', [
+                VisitStatusEnum::CANCELLED,
+                VisitStatusEnum::COMPLETED
+            ])
+            ->update([
+                'status' => VisitStatusEnum::COMPLETED
+            ]);
+    }
+
     public function index()
     {
+        $this->updatePastVisitsStatus();
+
         $users = User::where('role', 'admin')->paginate(10); // Adjust the pagination as needed
         return view('admin.user', compact('users'));
     }

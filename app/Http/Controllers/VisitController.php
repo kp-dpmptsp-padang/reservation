@@ -183,8 +183,23 @@ class VisitController extends Controller
         ]);
     }
 
+    private function updatePastVisitsStatus()
+    {
+        Visit::where('day', '<', now()->startOfDay())
+            ->whereNotIn('status', [
+                VisitStatusEnum::CANCELLED,
+                VisitStatusEnum::COMPLETED
+            ])
+            ->update([
+                'status' => VisitStatusEnum::COMPLETED
+            ]);
+    }
+
     public function index(Request $request)
     {
+
+        $this->updatePastVisitsStatus();
+
         $visits = Visit::with(['province', 'city'])
                        ->whereNotIn('status', [VisitStatusEnum::COMPLETED, VisitStatusEnum::CANCELLED])
                        ->orderBy('day', 'asc')
