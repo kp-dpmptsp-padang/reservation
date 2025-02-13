@@ -26,7 +26,9 @@
         @stack('scripts')
         </main>
     </div>
-    @include('partials.footer-admin')
+    <div class="pt-24">
+        @include('partials.footer-admin')
+    </div>
     <x-sweet-alert />
 </body>
 </html>

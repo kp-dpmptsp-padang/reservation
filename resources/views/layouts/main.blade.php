@@ -21,7 +21,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body>
+<body class="overflow-x-hidden">
     @include('partials.navbar-user')
     <main>
         @yield('content')   

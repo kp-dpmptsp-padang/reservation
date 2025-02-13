@@ -2,7 +2,7 @@
     <div class="mx-auto w-full max-w-screen-xl p-6 lg:p-8">
         <div class="flex flex-col md:flex-row justify-between gap-8">
             <div class="flex gap-6 max-w-xl">
-                <a href="/" class="inline-block group flex-shrink-0">
+                <a href="{{ route('home') }}" class="inline-block group flex-shrink-0">
                     <div class="flex items-center hover:opacity-90 transition-opacity">
                         <img src="{{ asset('images/Logo_Padang.svg') }}" class="h-16 object-contain transform group-hover:scale-105 transition-transform duration-300" alt="Logo DPMPTSP" />
                     </div>
