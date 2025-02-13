@@ -3,16 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Visit;
+use App\VisitStatusEnum;
 
 class DashboardController extends Controller
 {
+
+    private function updatePastVisitsStatus()
+    {
+        Visit::where('day', '<', now()->startOfDay())
+            ->whereNotIn('status', [
+                VisitStatusEnum::CANCELLED,
+                VisitStatusEnum::COMPLETED
+            ])
+            ->update([
+                'status' => VisitStatusEnum::COMPLETED
+            ]);
+    }
+
     public function index()
     {
-        // Fetch statistics and chart data
-        // $stats = $this->getStats();
-        // $visitsChart = $this->getVisitsChart();
-        // Pass the data to the view
-        // return view('dashboard', compact('stats', 'visitsChart'));
+        $this->updatePastVisitsStatus();
 
         return view('admin.dashboard');
     }

@@ -10,13 +10,13 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <h3 class="text-lg font-semibold mb-4">Kunjungan Berdasarkan Provinsi</h3>
+            <h3 class="text-lg font-semibold mb-8 text-center">Kunjungan Berdasarkan Provinsi</h3>
             <div class="relative h-[300px]">
                 <canvas id="provinceChart"></canvas>
             </div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-            <h3 class="text-lg font-semibold mb-4">Kunjungan Berdasarkan Kota</h3>
+            <h3 class="text-lg font-semibold mb-8 text-center">Kunjungan Berdasarkan Kota</h3>
             <div class="relative h-[300px]">
                 <canvas id="cityChart"></canvas>
             </div>

@@ -1,4 +1,3 @@
-<!-- filepath: /d:/Dev/Repos/DPMPTSP/reservation/resources/views/admin/visits/download.blade.php -->
 @props(['visit'])
 
 <x-modal id="download-visit-{{ $visit->id }}" title="Unduh Data Kunjungan" size="md">
@@ -11,7 +10,7 @@
   <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end">
     <button
       type="button"
-      class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00D5BE]"
       onclick="closeModal('download-visit-{{ $visit->id }}')"
     >
       Batal
@@ -20,7 +19,7 @@
       @csrf
       <button
         type="submit"
-        class="ml-2 px-4 py-2 text-sm font-medium text-white bg-green-500 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        class="ml-2 px-4 py-2 text-sm font-medium text-white bg-[#00D5BE] border border-transparent rounded-md shadow-sm hover:bg-[#00D5BE] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00D5BE]"
       >
         Unduh
       </button>
