@@ -50,9 +50,10 @@
         </select>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="hotelGrid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="hotelGrid">
+        </div>
     </div>
-
     <div class="mt-12 flex justify-center" id="pagination">
         <nav class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl shadow-sm">
         </nav>

@@ -1,9 +1,8 @@
 @extends('layouts.admin')
-@section('title', content: 'Dashboard | DPMPTSP Kota Padang')
+@section('title', 'Dashboard | DPMPTSP Kota Padang')
 @section('content')
-<x-summary-stats>
-</x-summary-stats>
-<x-summary-stats>
-</x-summary-stats>
-<x-graph></x-graph>
+    <div class="container px-6 mx-auto grid">        
+        <x-summary-stats />
+        <x-graph />
+    </div>
 @endsection

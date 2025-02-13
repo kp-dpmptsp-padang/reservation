@@ -14,8 +14,8 @@ class Visit extends Model
         'phone_number',
         'whatsapp_number',
         'email',
-        'province',
-        'city',
+        'province_id',
+        'city_id',
         'address',
         'homestay',
         'day',
@@ -106,5 +106,15 @@ class Visit extends Model
             'status' => VisitStatusEnum::CANCELLED,
             'cancelled_at' => now(),
         ]);
+    }
+
+    public function province()  
+    {
+        return $this->belongsTo(Province::class, 'province_id');  
+    }
+
+    public function city() 
+    {
+        return $this->belongsTo(City::class, 'city_id');  
     }
 }

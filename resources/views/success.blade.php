@@ -4,6 +4,21 @@
 
 <div class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 pt-32">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg shadow-sm animate-pulse">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-yellow-800">Penting!</h3>
+                    <div class="mt-2 text-sm text-yellow-700">
+                        <p>Harap screenshot atau simpan halaman ini sebagai bukti reservasi Anda. Halaman ini tidak akan tersedia lagi setelah direfresh.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
             <div class="relative">
                 <div class="absolute inset-0 bg-gradient-to-r from-[#00D5BE]/10 to-[#00A499]/10">
@@ -56,8 +71,20 @@
                             <p class="text-blue-700">
                                 Silakan konfirmasi reservasi Anda melalui WhatsApp dengan mengirimkan pesan ke nomor admin kami untuk proses verifikasi lebih lanjut.
                             </p>
-                            
-                            <a href="https://wa.me/{{ $whatsappNumber }}?text=Halo, saya {{ urlencode($visit->name) }} ingin mengkonfirmasi reservasi kunjungan untuk tanggal {{ urlencode(\Carbon\Carbon::parse($visit->day)->isoFormat('D MMMM Y')) }} pukul {{ urlencode(\Carbon\Carbon::parse($visit->clock)->format('H:i')) }} WIB" 
+                            @php
+                                $message = urlencode(
+                                    "Halo Admin DPMPTSP Kota Padang,\n\n".
+                                    "Saya telah melakukan reservasi kunjungan dengan detail berikut:\n".
+                                    "Nama: {$visit->name}\n".
+                                    "Instansi: {$visit->institution}\n".
+                                    "Tanggal: ".\Carbon\Carbon::parse($visit->day)->isoFormat('D MMMM Y')."\n".
+                                    "Waktu: ".\Carbon\Carbon::parse($visit->clock)->format('H:i')." WIB\n".
+                                    "Jumlah Rombongan: {$visit->group_size} Orang\n".
+                                    "Pimpinan Rombongan: {$visit->group_leader}\n\n".
+                                    "Mohon konfirmasi untuk reservasi kunjungan saya. Terima kasih."
+                                );
+                            @endphp
+                            <a href="https://wa.me/{{ $whatsappNumber }}?text={{ $message }}" 
                                target="_blank"
                                class="inline-flex items-center w-full justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-150">
                                 <svg class="h-5 w-5 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

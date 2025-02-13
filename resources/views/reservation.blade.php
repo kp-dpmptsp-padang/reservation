@@ -27,7 +27,6 @@
                 <div class="p-8">
                     <form id="reservationForm" action="{{ route('visits.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
                         @csrf
-
                         <div class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0">
@@ -46,9 +45,7 @@
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">Data Pemohon</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700">
-                                        Nama Lengkap <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Nama Lengkap" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,9 +58,7 @@
                                 </div>
                                 
                                 <div>
-                                    <label for="institution" class="block text-sm font-medium text-gray-700">
-                                        Nama Instansi Pemohon <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Nama Instansi Pemohon" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,9 +71,7 @@
                                 </div>
                                 
                                 <div>
-                                    <label for="phone_number" class="block text-sm font-medium text-gray-700">
-                                        Nomor HP (dapat menerima panggilan) <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Nomor HP (dapat menerima panggilan)" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,9 +84,7 @@
                                 </div>
                                 
                                 <div>
-                                    <label for="whatsapp_number" class="block text-sm font-medium text-gray-700">
-                                        Nomor WhatsApp (boleh sama dengan nomor HP) <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Nomor WhatsApp (boleh sama dengan nomor HP)" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -106,9 +97,7 @@
                                 </div>
                                 
                                 <div>
-                                    <label for="province" class="block text-sm font-medium text-gray-700">
-                                        Provinsi <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Provinsi" required />
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -116,9 +105,12 @@
                                                 <circle cx="12" cy="10" r="3"></circle>
                                             </svg>
                                         </div>
-                                        <select name="province" id="province" 
+                                        <select name="province_id" id="province" 
                                             class="mt-1 block w-full pl-10 pr-10 py-2 text-base rounded-lg border-gray-300 focus:outline-none focus:ring-[#00D5BE] focus:border-[#00D5BE] sm:text-sm transition-all duration-200 appearance-none bg-white">
                                             <option value="">Pilih Provinsi</option>
+                                            @foreach($provinces as $province)
+                                                <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                            @endforeach
                                         </select>
                                         <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -136,9 +128,7 @@
                                 </div>
                                 
                                 <div id="cityContainer" class="hidden">
-                                    <label for="city" class="block text-sm font-medium text-gray-700">
-                                        Kota/Kabupaten <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Kota/Kabupaten" required />
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -146,29 +136,25 @@
                                                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                             </svg>
                                         </div>
-                                        <select name="city" id="city" 
+                                        <select name="city_id" id="city" 
                                             class="mt-1 block w-full pl-10 pr-10 py-2 text-base rounded-lg border-gray-300 focus:outline-none focus:ring-[#00D5BE] focus:border-[#00D5BE] sm:text-sm transition-all duration-200 appearance-none bg-white">
                                             <option value="">Pilih Kota/Kabupaten</option>
+                                            @foreach($cities as $city)
+                                                <option value="{{ $city->id }}" data-province="{{ $city->province_id }}" class="city-option">
+                                                    {{ $city->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <div id="cityLoading" class="hidden absolute inset-y-0 right-0 flex items-center pr-8">
-                                            <svg class="animate-spin h-5 w-5 text-[#00D5BE]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                        </div>
                                     </div>
-                                    <p id="cityError" class="hidden mt-2 text-sm text-red-600"></p>
                                 </div>
                                 
                                 <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700">
-                                        Email Instansi/Lembaga/Pemohon <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Email Instansi/Lembaga/Pemohon" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,9 +167,7 @@
                                 </div>
 
                                 <div>
-                                    <label for="address" class="block text-sm font-medium text-gray-700">
-                                        Alamat Instansi <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Alamat Instansi" required />
                                     <div class="relative mt-1">
                                         <div class="absolute top-3 left-3 flex items-start pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -202,9 +186,7 @@
                             <h3 class="text-xl font-semibold text-gray-800 mb-4">Data Tempat Penginapan</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="homestay_select" class="block text-sm font-medium text-gray-700">
-                                        Tempat Menginap selama di Padang <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Tempat Menginap selama di Padang" required />
                                     <div class="relative mt-1">
                                         <div class="absolute top-3 left-3 flex items-start pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -217,16 +199,14 @@
                                             </svg>
                                         </div>
                                         <select name="homestay" id="homestay_select"
-                                            class="block w-full pl-10 pr-10 py-2.5 rounded-lg border border-gray-300 bg-white shadow-sm focus:ring-2 focus:ring-[#00D5BE] focus:border-[#00D5BE] transition-colors duration-200 appearance-none cursor-pointer hover:border-gray-400">
-                                            <option value="">Pilih tempat menginap...</option>
+                                            class="mt-1 block w-full pl-10 pr-10 py-2 text-base rounded-lg border-gray-300 focus:outline-none focus:ring-[#00D5BE] focus:border-[#00D5BE] sm:text-sm transition-all duration-200 appearance-none bg-white">
+                                            <option value="">Pilih tempat menginap</option>
                                             <option value="other">Lainnya</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div id="manual_input_container" class="hidden">
-                                    <label for="homestay" class="block text-sm font-medium text-gray-700">
-                                        Masukkan Nama Penginapan <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Masukkan Nama Penginapan" required />
                                     <div class="relative mt-1">
                                         <div class="absolute top-3 left-3 flex items-start pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -245,40 +225,34 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label for="day" class="block text-sm font-medium text-gray-700">
-                                            Tanggal Kunjungan <span class="text-red-500">*</span>
-                                        </label>
+                                        <x-input-label value="Tanggal Kunjungan" required />
                                         <div class="relative mt-1">
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                 </svg>
                                             </div>
-                                            <input type="date" name="day" id="day" 
+                                            <input type="date" name="day" id="day" min="{{ date('Y-m-d') }}"
                                                 class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
                                         </div>
                                     </div>
                                 
                                     <div>
-                                        <label for="clock" class="block text-sm font-medium text-gray-700">
-                                            Waktu Kunjungan <span class="text-red-500">*</span>
-                                        </label>
+                                        <x-input-label value="Jam Kunjungan" required />
                                         <div class="relative mt-1">
                                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </div>
-                                            <input type="time" name="clock" id="clock" 
+                                            <input type="time" name="clock" id="clock" min="07:00"
                                                 class="block w-full pl-10 rounded-lg border-gray-300 shadow-sm focus:ring-[#00D5BE] focus:border-[#00D5BE]">
                                         </div>
                                     </div>
                                 </div>
                         
                                 <div>
-                                    <label for="topic" class="block text-sm font-medium text-gray-700">
-                                        Topik Diskusi <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Topik Diskusi" required />
                                     <div class="relative mt-1">
                                         <div class="absolute top-3 left-3 flex items-start pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -291,9 +265,7 @@
                                 </div>
                                 
                                 <div>
-                                    <label for="group_size" class="block text-sm font-medium text-gray-700">
-                                        Jumlah Rombongan <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Jumlah Rombongan" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -306,9 +278,7 @@
                                 </div>
                                 
                                 <div>
-                                    <label for="group_leader" class="block text-sm font-medium text-gray-700">
-                                        Pimpinan Rombongan <span class="text-red-500">*</span>
-                                    </label>
+                                    <x-input-label value="Pimpinan Rombongan" required />
                                     <div class="relative mt-1">
                                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -321,9 +291,7 @@
                                 </div>
                         
                                 <div class="md:col-span-2">
-                                    <label for="description" class="block text-sm font-medium text-gray-700">
-                                        Keterangan
-                                    </label>
+                                    <x-input-label value="Keterangan" />
                                     <div class="relative mt-1">
                                         <div class="absolute top-3 left-3 flex items-start pointer-events-none">
                                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -341,7 +309,7 @@
                             <h3 class="text-xl font-semibold text-yellow-800 mb-4">Data Surat Permohonan Kunjungan</h3>
                         
                             <div>
-                                <label for="letter_file" class="block text-sm font-medium text-gray-700">Upload Surat (JPG/JPEG/PNG/PDF, max 3MB)</label>
+                                <x-input-label value="Upload Surat (JPG/JPEG/PNG/PDF, max 3MB)" />
                                 <div class="relative mt-1">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -360,7 +328,7 @@
                         </div>                      
                         
                         <p class="mt-4 text-sm text-red-500">
-                            * Dengan mengirimkan formulir ini, Anda dianggap telah membaca seluruh tata cara penerimaan tamu di Dinas Penanaman Modal dan Pelayanan Terpadu Satu Pintu Kota Padang dan bersedia mematuhi seluruh ketentuan tersebut.
+                            * Dengan mengirimkan formulir ini, Anda dianggap telah membaca seluruh tata cara penerimaan tamu di Dinas Penanaman Modal dan Pelayanan Terpadu Satu Pintu Kota Padang dan bersedia mematuhi seluruh ketentuan dan peraturan yang berlaku.
                         </p>
 
                         <button type="submit" class="w-full bg-[#00D5BE] text-white py-3 rounded-lg mt-6">
@@ -378,87 +346,31 @@
         const provinceSelect = document.getElementById('province');
         const citySelect = document.getElementById('city');
         const cityContainer = document.getElementById('cityContainer');
-        const provinceLoading = document.getElementById('provinceLoading');
-        const cityLoading = document.getElementById('cityLoading');
-        const provinceError = document.getElementById('provinceError');
-        const cityError = document.getElementById('cityError');
-    
-        const API_BASE_URL = '{{ url('/regions') }}';
-    
-        function showError(element, message) {
-            element.textContent = message;
-            element.classList.remove('hidden');
-        }
-    
-        function hideError(element) {
-            element.textContent = '';
-            element.classList.add('hidden');
-        }
-    
-        async function fetchProvinces() {
-            try {
-                
-                provinceLoading.classList.remove('hidden');
-                hideError(provinceError);
-
-                const response = await fetch(`${API_BASE_URL}/provinces`);
-                if (!response.ok) throw new Error('Gagal mengambil data provinsi');
-                
-                const data = await response.json();
-                
-                provinceSelect.innerHTML = '<option value="">Pilih Provinsi</option>';
-                data.forEach(province => {
-                    const option = document.createElement('option');
-                    option.value = province.id;
-                    option.textContent = province.name;
-                    provinceSelect.appendChild(option);
-                });
-            } catch (error) {
-                console.error('Error:', error);
-                showError(provinceError, 'Gagal memuat data provinsi. Silakan coba lagi.');
-            } finally {
-                provinceLoading.classList.add('hidden');
-            }
-        }
-
-        async function fetchCities(provinceId) {
-            try {
-                cityLoading.classList.remove('hidden');
-                hideError(cityError);
-                
-                const response = await fetch(`${API_BASE_URL}/provinces/${provinceId}/cities`);
-                if (!response.ok) throw new Error('Gagal mengambil data kota');
-                
-                const cities = await response.json();
-                
-                citySelect.innerHTML = '<option value="">Pilih Kota/Kabupaten</option>';
-                cities.forEach(city => {
-                    const option = document.createElement('option');
-                    option.value = city.id;
-                    option.textContent = city.name;
-                    citySelect.appendChild(option);
-                });
-
-                cityContainer.classList.remove('hidden');
-            } catch (error) {
-                console.error('Error:', error);
-                showError(cityError, 'Gagal memuat data kota. Silakan coba lagi.');
-            } finally {
-                cityLoading.classList.add('hidden');
-            }
-        }
-    
+        const cityOptions = document.querySelectorAll('.city-option');
+        
+        cityOptions.forEach(option => {
+            option.style.display = 'none';
+        });
+        
         provinceSelect.addEventListener('change', function() {
-            hideError(cityError);
-            if (this.value) {
-                fetchCities(this.value);
+            const selectedProvinceId = this.value;
+            
+            citySelect.value = '';
+            
+            if (selectedProvinceId) {
+                cityContainer.classList.remove('hidden');
+                
+                cityOptions.forEach(option => {
+                    if (option.dataset.province === selectedProvinceId) {
+                        option.style.display = '';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                });
             } else {
                 cityContainer.classList.add('hidden');
-                citySelect.innerHTML = '<option value="">Pilih Kota/Kabupaten</option>';
             }
         });
-    
-        fetchProvinces();
     });
 
     document.addEventListener('DOMContentLoaded', function() {

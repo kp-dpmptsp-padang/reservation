@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('whatsapp_number');
             $table->string('email');
-            $table->string('province');
-            $table->string('city');
+            $table->foreignId('province_id')->constrained('provinces');
+            $table->foreignId('city_id')->constrained('cities');
             $table->string('address');
             $table->string('homestay');
             $table->date('day');
